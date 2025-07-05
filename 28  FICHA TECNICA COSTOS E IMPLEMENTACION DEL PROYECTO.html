@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Técnica - Proyecto Gardem</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .info-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-card li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info-card li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ecf0f1;
+            transition: background-color 0.3s ease;
+        }
+
+        tr:hover td {
+            background-color: #f8f9fa;
+        }
+
+        .total-row {
+            background: #e8f5e8 !important;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .total-row td {
+            border-top: 2px solid #27ae60;
+        }
+
+        .cost-summary {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .cost-summary h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .cost-summary .amount {
+            font-size: 2.5em;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .phases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .phase {
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .phase:hover::before {
+            left: 100%;
+        }
+
+        .phase:hover {
+            transform: translateY(-3px);
+        }
+
+        .notes {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .notes h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .notes ul {
+            color: #856404;
+        }
+
+        .notes li {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Catálogo Web "Gardem"</h1>
+            <p>Sistema de gestión y visualización de catálogo de ropa</p>
+        </div>
+
+        <div class="content">
+            <!-- Información General -->
+            <div class="section">
+                <h2>📋 Información General del Proyecto</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>🎯 Descripción</h3>
+                        <p>Sistema web para la gestión y visualización de un catálogo de ropa, con carrito de compras, filtrado por categorías, integración con WhatsApp y panel de administración.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>💻 Tecnologías Utilizadas</h3>
+                        <ul>
+                            <li>Frontend: HTML5, CSS3, JavaScript</li>
+                            <li>Backend: PHP 7.x</li>
+                            <li>Base de datos: MySQL</li>
+                            <li>Servidor: XAMPP (Apache + MySQL)</li>
+                            <li>Herramientas: phpMyAdmin, WhatsApp API</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>🔧 Módulos Principales</h3>
+                        <ul>
+                            <li>Catálogo de productos</li>
+                            <li>Carrito de compras</li>
+                            <li>Gestión de usuarios/administradores</li>
+                            <li>Panel de administración</li>
+                            <li>Integración con WhatsApp</li>
+                            <li>Filtros por categoría, color, talla</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>⚙️ Requerimientos del Sistema</h3>
+                        <ul>
+                            <li>Navegador web moderno</li>
+                            <li>Servidor local o hosting compatible</li>
+                            <li>Acceso a internet para WhatsApp</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Costos del Proyecto -->
+            <div class="section">
+                <h2>💰 Costos del Proyecto</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th>Costo Estimado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Desarrollo</td>
+                            <td>$1,000 USD</td>
+                        </tr>
+                        <tr>
+                            <td>Hosting (1 año)</td>
+                            <td>$60 USD</td>
+                        </tr>
+                        <tr>
+                            <td>Dominio (1 año)</td>
+                            <td>$12 USD</td>
+                        </tr>
+                        <tr>
+                            <td>SSL (1 año)</td>
+                            <td>$0 USD</td>
+                        </tr>
+                        <tr>
+                            <td>WhatsApp API (opcional)</td>
+                            <td>$0 - $100 USD/año</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td><strong>Total Aproximado</strong></td>
+                            <td><strong>$1,072 USD</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Fases de Implementación -->
+            <div class="section">
+                <h2>🚀 Fases de Implementación</h2>
+                <div class="phases">
+                    <div class="phase">
+                        <strong>1. Análisis y Diseño</strong>
+                    </div>
+                    <div class="phase">
+                        <strong>2. Desarrollo</strong>
+                    </div>
+                    <div class="phase">
+                        <strong>3. Pruebas</strong>
+                    </div>
+                    <div class="phase">
+                        <strong>4. Despliegue</strong>
+                    </div>
+                    <div class="phase">
+                        <strong>5. Soporte</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Equipos -->
+            <div class="section">
+                <h2>🖥️ Cotización de Equipos</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Equipo</th>
+                            <th>Cantidad</th>
+                            <th>Costo Unitario (USD)</th>
+                            <th>Costo Total (USD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Computadora de desarrollo</td>
+                            <td>2</td>
+                            <td>$600</td>
+                            <td>$1,200</td>
+                        </tr>
+                        <tr>
+                            <td>Laptop para pruebas</td>
+                            <td>1</td>
+                            <td>$500</td>
+                            <td>$500</td>
+                        </tr>
+                        <tr>
+                            <td>Servidor local (XAMPP)</td>
+                            <td>1</td>
+                            <td>$0 (existente)</td>
+                            <td>$0</td>
+                        </tr>
+                        <tr>
+                            <td>Router/Internet</td>
+                            <td>1</td>
+                            <td>$20/mes</td>
+                            <td>$240/año</td>
+                        </tr>
+                        <tr>
+                            <td>Smartphones para pruebas</td>
+                            <td>2</td>
+                            <td>$150</td>
+                            <td>$300</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td><strong>Total Equipos</strong></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><strong>$2,240</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Personal Humano -->
+            <div class="section">
+                <h2>👥 Personal Humano</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rol</th>
+                            <th>Cantidad</th>
+                            <th>Honorarios (USD/mes)</th>
+                            <th>Meses</th>
+                            <th>Costo Total (USD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Líder de proyecto</td>
+                            <td>1</td>
+                            <td>$800</td>
+                            <td>2</td>
+                            <td>$1,600</td>
+                        </tr>
+                        <tr>
+                            <td>Desarrollador web</td>
+                            <td>1</td>
+                            <td>$700</td>
+                            <td>2</td>
+                            <td>$1,400</td>
+                        </tr>
+                        <tr>
+                            <td>Colaborador QA</td>
+                            <td>1</td>
+                            <td>$500</td>
+                            <td>1</td>
+                            <td>$500</td>
+                        </tr>
+                        <tr>
+                            <td>Soporte/Documentación</td>
+                            <td>1</td>
+                            <td>$400</td>
+                            <td>1</td>
+                            <td>$400</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td><strong>Total Personal</strong></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><strong>$3,900</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Resumen General -->
+            <div class="section">
+                <h2>📊 Resumen General</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th>Costo Total (USD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Equipos</td>
+                            <td>$2,240</td>
+                        </tr>
+                        <tr>
+                            <td>Personal Humano</td>
+                            <td>$3,900</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td><strong>Total Global</strong></td>
+                            <td><strong>$6,140</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="cost-summary">
+                    <h3>💼 Inversión Total del Proyecto</h3>
+                    <div class="amount">$6,140 USD</div>
+                </div>
+            </div>
+
+            <!-- Notas -->
+            <div class="notes">
+                <h4>📝 Notas Importantes:</h4>
+                <ul>
+                    <li>Los valores son referenciales y pueden variar según el país, experiencia y equipamiento existente.</li>
+                    <li>Puedes ajustar la cantidad de meses, personas o equipos según tu proyecto.</li>
+                    <li>Si ya cuentas con algunos equipos, puedes descontar esos valores del presupuesto total.</li>
+                    <li>Los costos de desarrollo incluyen análisis, diseño, programación y pruebas iniciales.</li>
+                    <li>El mantenimiento y actualizaciones futuras no están incluidas en esta cotización.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
